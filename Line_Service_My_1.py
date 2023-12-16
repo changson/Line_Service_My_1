@@ -18,9 +18,9 @@ import time
 app = Flask(__name__)
 static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
 
-Access_Token = os.environ.get(My_Channel_Access_Token)
-Secret = os.environ.get(My_Channel_Secret)
-Openaiapi_Key = os.environ.get(My_Openai_Api_Key)
+Access_Token = os.environ.get("My_Channel_Access_Token")
+Secret = os.environ.get("My_Channel_Secret")
+Openaiapi_Key = os.environ.get("My_Openai_Api_Key")
 
 # Channel Access Token
 if Access_Token is not None:

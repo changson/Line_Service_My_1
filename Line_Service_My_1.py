@@ -19,24 +19,24 @@ app = Flask(__name__)
 static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
 
 Access_Token = os.environ.get("My_Channel_Access_Token")
-Secret = os.environ.get("My_Channel_Secret")
+Channel_Secret = os.environ.get("My_Channel_Secret")
 Openaiapi_Key = os.environ.get("My_Openai_Api_Key")
 
 # Channel Access Token
 if Access_Token is not None:
     line_bot_api = LineBotApi(Access_Token)
 else:
-    app.logger.info("Channel_Access_Token missed"  
+    app.logger.info("Channel_Access_Token missed") 
 # Channel Secret
-if Secret is not None:
-    handler = WebhookHandler(Secret)
+if Channel_Secret is not None:
+    handler = WebhookHandler(Channel_Secret)
 else:
-    app.logger.info("Channel_Secret missed"
+    app.logger.info("Channel_Secret missed")
 # OPENAI API Key初始化設定
 if Openaiapi_Key is not None:
     openai.api_key = Openaiapi_Key
 else:
-    app.logger.info("Openai_Api_Key missed"
+    app.logger.info("Openai_Api_Key missed")
 
 # 建立關鍵字和回覆內容的對照表，用來儲存不同的回覆內容
 keyword_reply = {

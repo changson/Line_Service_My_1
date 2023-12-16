@@ -15,14 +15,19 @@ import openai
 import time
 #======python的函數庫==========
 
+Access_Token = os.environ.get(My_Channel_Access_Token)
+Secret = os.environ.get(My_Channel_Secret)
+Openaiapi_key = os.environ.get(My_Openai_Api_Key)
+
+
 app = Flask(__name__)
 static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
 # Channel Access Token
-line_bot_api = LineBotApi('Channel Access Token')
+line_bot_api = LineBotApi(Access_Token)
 # Channel Secret
-handler = WebhookHandler('Channel secret')
+handler = WebhookHandler(Secret)
 # OPENAI API Key初始化設定
-openai.api_key = 'OPENAI_API_KEY'
+openai.api_key = Openaiapi_key
 
 
 # 建立關鍵字和回覆內容的對照表，用來儲存不同的回覆內容

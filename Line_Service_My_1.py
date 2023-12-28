@@ -15,6 +15,24 @@ import openai
 import time
 #======python的函數庫==========
 
+#======讓render不會睡著======
+import threading 
+import requests
+
+Render_Url = os.environ.get("My_Render_Url")
+def wake_up_heroku():
+    while 1==1:
+        url = Render_Url + '/heroku_wake_up'
+        res = requests.get(url)
+        if res.status_code==200:
+            print('喚醒heroku成功')
+        else:
+            print('喚醒失敗')
+        time.sleep(840)
+##15分鐘x60=900秒x0.95=855約=>850###
+threading.Thread(target=wake_up_heroku).start()
+#======讓render不會睡著======
+
 app = Flask(__name__)
 static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
 
@@ -80,22 +98,6 @@ def callback():
     return 'OK'
 
 #======讓render不會睡著======
-import threading 
-import requests
-
-Render_Url = os.environ.get("My_Render_Url")
-def wake_up_heroku():
-    while 1==1:
-        url = Render_Url + '/heroku_wake_up'
-        res = requests.get(url)
-        if res.status_code==200:
-            print('喚醒heroku成功')
-        else:
-            print('喚醒失敗')
-        time.sleep(840)
-##15分鐘x60=900秒x0.95=855約=>850###
-threading.Thread(target=wake_up_heroku).start()
-
 @app.route("/heroku_wake_up")
 def heroku_wake_up():
     return "Hey,Wake Up!!"

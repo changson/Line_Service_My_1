@@ -22,13 +22,20 @@ import requests
 Render_Url = os.environ.get("My_Render_Url")
 def wake_up_heroku():
     while 1==1:
+        url = Render_Url
+        res = requests.get(url)
+        if res.status_code==200:
+            print('Home OK')
+        else:
+            print('Home Fail!')
+
         url = Render_Url + '/heroku_wake_up'
         res = requests.get(url)
         if res.status_code==200:
             print('喚醒heroku成功')
         else:
             print('喚醒失敗')
-        time.sleep(840)
+        time.sleep(850)
 ##15分鐘x60=900秒x0.95=855約=>850###
 threading.Thread(target=wake_up_heroku).start()
 #======讓render不會睡著======
@@ -59,6 +66,7 @@ else:
 # 建立關鍵字和回覆內容的對照表，用來儲存不同的回覆內容
 keyword_reply = {
     '你好': '你好，很高興為您服務。',
+    '您好': '您好!',
     '天氣': '今天天氣很好。',
     '打擾': '你好，有什麼需要幫忙的？',
     '謝謝': '不客氣，還有什麼需要幫忙的？'

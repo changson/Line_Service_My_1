@@ -29,12 +29,12 @@ def wake_up_heroku():
         else:
             app.logger.info('Home Fail!')
 
-        url = Render_Url + '/heroku_wake_up'
-        res = requests.get(url)
-        if res.status_code==200:
-            app.logger.info('喚醒heroku成功')
-        else:
-            app.logger.info('喚醒失敗')
+#        url = Render_Url + '/heroku_wake_up'
+#        res = requests.get(url)
+#        if res.status_code==200:
+#            app.logger.info('喚醒heroku成功')
+#        else:
+#            app.logger.info('喚醒失敗')
         time.sleep(850)
 ##15分鐘x60=900秒x0.95=855約=>850###
 threading.Thread(target=wake_up_heroku).start()
